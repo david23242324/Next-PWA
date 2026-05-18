@@ -1,24 +1,23 @@
 {
-"name": "Calculadora",
-"short_name": "Calculadora",
-"description": "Esta es mi app calculadora",
-"start_url": "/",
-"display": "standalone",
-"background_color": "#0a84ff",
-"theme_color": "#0a84ff",
-"icons": [
-{
-"src": "https://cdn-icons-png.flaticon.com/512/3395/3395170.png",
-"sizes": "192x192",
-"type": "image/png",
-"purpose": "any"
-},
-{
-"src": "https://cdn-icons-png.flaticon.com/512/3395/3395170.png",
-"sizes": "512x512",
-"type": "image/png",
-"purpose": "maskable"
-
-}
-]
+  "name": "Generador de Insultos Elegantes",
+  "short_name": "Insultos",
+  "description": "App troll que crea frases sofisticadas para vacilar con estilo.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#111111",
+  "theme_color": "#ff006e",
+  "icons": [
+    {
+      "src": "https://cdn-icons-png.flaticon.com/512/2018/2018366.png ",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "https://cdn-icons-png.flaticon.com/512/2018/2018366.png ",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
 }
