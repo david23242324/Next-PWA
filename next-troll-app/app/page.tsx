@@ -1,224 +1,90 @@
 "use client";
-
+import { Flame, CalendarDays, CheckSquare, Activity, Zap } from "lucide-react";
 import { useState } from "react";
 
-import {
-  Sparkles,
-  Bookmark,
-  Layers3,
-  Shuffle,
-} from "lucide-react";
+export default function InsultPlanner() {
+  const [insults, setInsults] = useState<string[]>([
+    "Carechimba",
+    "Huevón",
+    "Mamagallista",
+  ]);
 
-export default function Page() {
-  const [insulto, setInsulto] = useState("");
-
-  const insultosElegantes = [
-    "Tu intelecto es tan útil como un paraguas roto.",
-    "Eres la versión beta de un error permanente.",
-    "Tu lógica es más confusa que un manual de Ikea.",
-    "Tienes la gracia de un semáforo dañado.",
-    "Tu carisma compite con el de una impresora sin tinta.",
-    "Eres tan relevante como un meme de 2010.",
+  const insultBank = [
+    "Sapo hijuep...",
+    "Gonorrea",
+    "Culicagado",
+    "Ñero de quinta",
+    "Lagarto",
   ];
 
-  const generarInsulto = () => {
-    const randomIndex = Math.floor(
-      Math.random() * insultosElegantes.length
-    );
-
-    setInsulto(insultosElegantes[randomIndex]);
-
-    navigator.vibrate?.(40);
+  const generateInsult = () => {
+    const random = insultBank[Math.floor(Math.random() * insultBank.length)];
+    setInsults([...insults, random]);
   };
 
   return (
-    <section
-      className="
-        w-full
-        min-h-[calc(100dvh-220px)]
-        flex
-        flex-col
-        justify-between
-        px-1
-        pt-6
-        pb-1
-      "
-    >
-
-      {/* TOP */}
-      <div className="flex flex-col gap-6">
-
-        {/* HERO */}
-        <div className="px-1">
-          <p className="text-white/30 text-[11px] tracking-[0.28em] uppercase">
-            Premium Collection
-          </p>
-
-          <h2
-            className="
-              mt-3
-              text-[2.7rem]
-              leading-[0.9]
-              font-semibold
-              tracking-[-0.05em]
-              max-w-[260px]
-            "
-          >
-            Elegant
-            <br />
-            Insults
-          </h2>
-
-          <p className="mt-4 text-[14px] text-white/45 leading-relaxed max-w-[260px]">
-            Minimal. Sharp. Unforgettable.
-          </p>
+    <div className="space-y-6 animate-fadeIn">
+      {/* Greeting + Stats */}
+      <div className="bg-white rounded-2xl shadow-lg p-6 text-black">
+        <h2 className="text-2xl font-bold mb-2">Buenos días, David</h2>
+        <p className="text-sm text-gray-600">
+          Hoy tienes {insults.length} insultos creados. Genera más para tu colección.
+        </p>
+        <div className="flex gap-6 mt-5 text-sm text-gray-700">
+          <div className="flex items-center gap-2">
+            <CalendarDays size={20} className="text-[#7b6f4b]" /> 3 reuniones
+          </div>
+          <div className="flex items-center gap-2">
+            <CheckSquare size={20} className="text-[#7b6f4b]" /> 2 tareas
+          </div>
+          <div className="flex items-center gap-2">
+            <Activity size={20} className="text-[#7b6f4b]" /> 1 hábito
+          </div>
         </div>
+      </div>
 
-        {/* MAIN CARD */}
-        <div
+      {/* Lista de insultos */}
+      <div>
+        <h3 className="text-lg font-semibold mb-3 flex items-center gap-2">
+          <Flame className="text-[#7b6f4b]" size={22} /> Insultos creados
+        </h3>
+        <ul className="space-y-3">
+          {insults.map((insult, i) => (
+            <li
+              key={i}
+              className="bg-white rounded-xl border border-gray-200 shadow-sm p-4 text-black transition-transform hover:scale-[1.02] animate-slideUp"
+            >
+              {insult}
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      {/* Botón generador grande */}
+      <div>
+        <button
+          onClick={generateInsult}
           className="
-            light-card
-            rounded-[30px]
-            px-6
+            w-full
             py-6
-            shadow-2xl
+            bg-gradient-to-r from-[#7b6f4b] to-[#a58b61]
+            text-white
+            rounded-2xl
+            font-bold
+            text-lg
+            flex
+            items-center
+            justify-center
+            gap-3
+            shadow-xl
+            hover:scale-[1.03]
+            transition
+            animate-pulse
           "
         >
-          <div className="flex items-start justify-between gap-4">
-
-            <div>
-              <p className="text-black/40 text-[10px] tracking-[0.22em] uppercase">
-                Featured
-              </p>
-
-              <h3 className="text-black text-[24px] font-semibold mt-2">
-                Daily Insult
-              </h3>
-            </div>
-
-            <div className="w-11 h-11 rounded-full bg-black/5 flex items-center justify-center shrink-0">
-              <Sparkles
-                size={17}
-                strokeWidth={2}
-                className="text-black"
-              />
-            </div>
-
-          </div>
-
-          <div className="mt-8 min-h-[140px] flex items-start">
-            <p className="text-black text-[17px] leading-[1.7] font-medium tracking-[-0.03em]">
-              {insulto ||
-                "Generate an elegant insult and let sophistication do the damage."}
-            </p>
-          </div>
-
-          <button
-            onClick={generarInsulto}
-            className="
-              mt-8
-              w-full
-              bg-black
-              text-white
-              rounded-[20px]
-              py-4
-              text-[14px]
-              font-medium
-              tracking-wide
-              active:scale-[0.98]
-              transition
-            "
-          >
-            Generate Insult
-          </button>
-        </div>
-
-        {/* GRID */}
-        <div className="grid grid-cols-2 gap-5">
-
-          <div
-            className="
-              surface-card
-              rounded-[26px]
-              p-5
-              min-h-[170px]
-              flex
-              flex-col
-              justify-between
-            "
-          >
-            <div className="w-11 h-11 rounded-2xl bg-white/5 flex items-center justify-center">
-              <Bookmark size={18} strokeWidth={1.8} />
-            </div>
-
-            <div className="mt-8">
-              <h4 className="text-[17px] font-medium">
-                Favorites
-              </h4>
-
-              <p className="text-[12px] mt-2 text-white/40 leading-relaxed">
-                Saved insults collection
-              </p>
-            </div>
-          </div>
-
-          <div
-            className="
-              surface-card
-              rounded-[26px]
-              p-5
-              min-h-[170px]
-              flex
-              flex-col
-              justify-between
-            "
-          >
-            <div className="w-11 h-11 rounded-2xl bg-white/5 flex items-center justify-center">
-              <Layers3 size={18} strokeWidth={1.8} />
-            </div>
-
-            <div className="mt-8">
-              <h4 className="text-[17px] font-medium">
-                Categories
-              </h4>
-
-              <p className="text-[12px] mt-2 text-white/40 leading-relaxed">
-                Explore insult styles
-              </p>
-            </div>
-          </div>
-
-        </div>
+          <Zap size={26} strokeWidth={2.5} /> Generar insulto
+        </button>
       </div>
-
-      {/* BOTTOM CARD */}
-      <div
-        className="
-          surface-card
-          rounded-[28px]
-          p-6
-          mt-10
-        "
-      >
-        <div className="flex items-center justify-between gap-4">
-
-          <div>
-            <p className="text-white/30 text-[10px] tracking-[0.24em] uppercase">
-              Random Mode
-            </p>
-
-            <h4 className="mt-3 text-[20px] font-medium">
-              Unexpected responses
-            </h4>
-          </div>
-
-          <div className="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center shrink-0">
-            <Shuffle size={19} strokeWidth={1.9} />
-          </div>
-
-        </div>
-      </div>
-
-    </section>
+    </div>
   );
 }
