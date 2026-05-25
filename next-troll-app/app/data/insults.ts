@@ -1,0 +1,17 @@
+export const defaultInsults = [
+  'Gonorrea.',
+  'Malparido.',
+  'Hijueputa premium.',
+  'Carechimba.',
+  'Caremondá.',
+  'Triple cabeza de mondá.',
+  'Soplamondá.',
+  'Cachón internacional.',
+  'Más feo que pegarle a la mamá el Día de la Madre.',
+  'Más falso que billete de tres mil.',
+  'Cacorro cósmico.',
+  'Bobo hijueputa.',
+  'Licenciado en hablar mierda.',
+  'Gerente general de la pendejada.',
+  'Embajador mundial de las malas decisiones.',
+];

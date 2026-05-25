@@ -1,90 +1,74 @@
-"use client";
-import { Flame, CalendarDays, CheckSquare, Activity, Zap } from "lucide-react";
-import { useState } from "react";
+'use client';
 
-export default function InsultPlanner() {
-  const [insults, setInsults] = useState<string[]>([
-    "Carechimba",
-    "Huevón",
-    "Mamagallista",
-  ]);
+import { useState } from 'react';
+import { motion } from 'framer-motion';
+import BottomNav from './Components/BottomNav';
+import { defaultInsults } from './data/insults';
+import { InsultManager } from './lib/InsultManager';
 
-  const insultBank = [
-    "Sapo hijuep...",
-    "Gonorrea",
-    "Culicagado",
-    "Ñero de quinta",
-    "Lagarto",
-  ];
+export default function HomePage() {
+  const [history, setHistory] = useState<string[]>([]);
+
+  const manager = new InsultManager(defaultInsults);
 
   const generateInsult = () => {
-    const random = insultBank[Math.floor(Math.random() * insultBank.length)];
-    setInsults([...insults, random]);
+    const random = manager.getRandomInsult();
+
+    setHistory((prev) => [random, ...prev]);
+
+    if (navigator.vibrate) {
+      navigator.vibrate(100);
+    }
   };
 
   return (
-    <div className="space-y-6 animate-fadeIn">
-      {/* Greeting + Stats */}
-      <div className="bg-white rounded-2xl shadow-lg p-6 text-black">
-        <h2 className="text-2xl font-bold mb-2">Buenos días, David</h2>
-        <p className="text-sm text-gray-600">
-          Hoy tienes {insults.length} insultos creados. Genera más para tu colección.
+    <main className='min-h-screen bg-black px-5 py-10 pb-28 text-white flex flex-col items-center'>
+      
+      {/* Título */}
+      <div className='mb-10 text-center'>
+        <h1 className='text-5xl font-black text-green-400'>
+          INSULTADOR
+        </h1>
+
+        <p className='mt-2 text-zinc-400'>
+          Tecnología avanzada en groserías colombianas 🇨🇴
         </p>
-        <div className="flex gap-6 mt-5 text-sm text-gray-700">
-          <div className="flex items-center gap-2">
-            <CalendarDays size={20} className="text-[#7b6f4b]" /> 3 reuniones
-          </div>
-          <div className="flex items-center gap-2">
-            <CheckSquare size={20} className="text-[#7b6f4b]" /> 2 tareas
-          </div>
-          <div className="flex items-center gap-2">
-            <Activity size={20} className="text-[#7b6f4b]" /> 1 hábito
-          </div>
-        </div>
       </div>
 
-      {/* Lista de insultos */}
-      <div>
-        <h3 className="text-lg font-semibold mb-3 flex items-center gap-2">
-          <Flame className="text-[#7b6f4b]" size={22} /> Insultos creados
-        </h3>
-        <ul className="space-y-3">
-          {insults.map((insult, i) => (
-            <li
-              key={i}
-              className="bg-white rounded-xl border border-gray-200 shadow-sm p-4 text-black transition-transform hover:scale-[1.02] animate-slideUp"
+      {/* Historial */}
+      <div className='w-full max-w-md flex flex-col gap-4'>
+        {history.length === 0 ? (
+          <div className='rounded-3xl border border-zinc-800 bg-zinc-900 p-6 text-center text-zinc-500'>
+            Presione el botón y reciba conocimiento colombiano.
+          </div>
+        ) : (
+          history.map((insult, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 30, scale: 0.9 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              transition={{ duration: 0.3 }}
+              className='rounded-3xl border border-green-500/20 bg-zinc-900 p-5 shadow-lg'
             >
-              {insult}
-            </li>
-          ))}
-        </ul>
+              <p className='text-lg font-semibold text-green-400'>
+                {insult}
+              </p>
+            </motion.div>
+          ))
+        )}
       </div>
 
-      {/* Botón generador grande */}
-      <div>
-        <button
-          onClick={generateInsult}
-          className="
-            w-full
-            py-6
-            bg-gradient-to-r from-[#7b6f4b] to-[#a58b61]
-            text-white
-            rounded-2xl
-            font-bold
-            text-lg
-            flex
-            items-center
-            justify-center
-            gap-3
-            shadow-xl
-            hover:scale-[1.03]
-            transition
-            animate-pulse
-          "
-        >
-          <Zap size={26} strokeWidth={2.5} /> Generar insulto
-        </button>
-      </div>
-    </div>
+      {/* Botón */}
+      <motion.button
+        whileTap={{ scale: 0.92 }}
+        whileHover={{ scale: 1.03 }}
+        onClick={generateInsult}
+        className='fixed bottom-32 z-40 w-[90%] max-w-md rounded-3xl bg-green-500 py-5 text-xl font-black text-black shadow-[0_0_30px_rgba(34,197,94,0.5)] glow'
+      >
+        INSÚLTEME
+      </motion.button>
+
+      <BottomNav />
+    </main>
   );
 }
