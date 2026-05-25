@@ -1,10 +1,21 @@
 'use client';
 
+import dynamic from 'next/dynamic';
 import { useState } from 'react';
 
-import { Wheel } from 'react-custom-roulette';
+const Wheel = dynamic(
+  () =>
+    import('react-custom-roulette').then(
+      (mod) => mod.Wheel
+    ),
+  {
+    ssr: false,
+  }
+);
+
 import { motion } from 'framer-motion';
 import BottomNav from '../Components/BottomNav';
+
 
 
 const rouletteData = [
