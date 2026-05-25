@@ -4,17 +4,17 @@
   "description": "App troll que crea frases sofisticadas para vacilar con estilo.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#111111",
-  "theme_color": "#ff006e",
+  "background_color": "#000000",
+  "theme_color": "#22c55e",
   "icons": [
     {
-      "src": "https://cdn-icons-png.flaticon.com/512/2018/2018366.png ",
+      "src": "   https://cdn-icons-png.flaticon.com/512/6676/6676215.png  ",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "https://cdn-icons-png.flaticon.com/512/2018/2018366.png ",
+      "src": "   https://cdn-icons-png.flaticon.com/512/6676/6676215.png  ",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "maskable"
